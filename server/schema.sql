@@ -1,4 +1,4 @@
--- CREATE DATABASE chat;
+CREATE DATABASE chat;
 
 USE chat;
 
@@ -23,6 +23,6 @@ CREATE TABLE rooms (
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u student < server/schema.sql
+ *    mysql -u -p student < server/schema.sql
  *  to create the database and the tables.*/
 

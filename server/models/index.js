@@ -1,31 +1,26 @@
 var db = require('../db');
 var mysql = require('mysql');
 
-exports.sendResponse = function(status, response) {
-  response.writeHead(status, exports.headers);
-  response.end(response);
-};
-
 module.exports = {
   messages: {
-    get: function (message) {
-
-      db.connection.query('SELECT message from messages', function(err, rows, fields) {
+    get: function (res) {
+      // Database Query
+      db.connection.query('SELECT * from messages', function(err, result) {
         if (err) {
           console.log(err);
           return;
         }
-        exports.sendResponse(200, rows);
+        res.send({results: result});
       });
     }, // a function which produces all the messages
-    post: function (message) {
-
-      db.connection.query(`INSERT INTO messages (users_id, room, message) VALUES (${message.username}, ${message.roomname}, ${message.text})`, function(err, res) {
+    post: function (message, res) {
+      // Database Query
+      db.connection.query(`INSERT INTO messages (users_id, room, message) VALUES ("${message.username}", "${message.roomname}", "${message.text}")`, function(err, res) {
         if (err) {
           console.log(err);
           return;
         }
-        exports.sendResponse('message received');
+        console.log('message received');
       })
 
     } // a function which can be used to insert a message into the database
