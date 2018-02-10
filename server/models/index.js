@@ -5,11 +5,12 @@ module.exports = {
   messages: {
     get: function (res) {
       // Database Query
-      db.connection.query('SELECT * from messages', function(err, result) {
+      db.connection.query('SELECT users_id as username, room as roomname, message as text from messages', function(err, result) {
         if (err) {
           console.log(err);
-          return;
+          // return;
         }
+        console.log(result);
         res.send({results: result});
       });
     }, // a function which produces all the messages
@@ -21,6 +22,7 @@ module.exports = {
           return;
         }
         console.log('message received');
+        res.send('success');
       })
 
     } // a function which can be used to insert a message into the database
